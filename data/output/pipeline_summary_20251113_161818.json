@@ -1,0 +1,6 @@
+{
+  "total_entities": 3609147,
+  "total_relationships": 40559658,
+  "timestamp": "2025-11-13T16:18:18.738815",
+  "mode": "direct_neo4j_import"
+}

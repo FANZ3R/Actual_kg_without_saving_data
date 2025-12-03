@@ -1,0 +1,391 @@
+2025-11-05 17:55:37,925 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-11-05 17:55:38,143 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-11-05 17:55:38,144 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-11-05 17:55:38,144 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-11-05 17:55:38,144 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-11-05 17:55:38,144 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-11-05 17:55:38,159 - src.data.ingestion - INFO - Loaded 423 blocks from cleaned_Glossary_Procurement Tactics(1).json
+2025-11-05 17:55:38,159 - src.data.ingestion - INFO - Total: Loaded 423 blocks from 1 files
+2025-11-05 17:55:38,159 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 423, 'total_characters': 5432695, 'avg_text_length': 12843.25059101655, 'source_types': {'json': 423}, 'source_files': {'cleaned_Glossary_Procurement Tactics(1).json': 423}}
+2025-11-05 17:55:38,159 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.02 seconds
+2025-11-05 17:55:38,159 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-11-05 17:55:38,159 - src.pipeline.orchestrator - INFO - Converting 423 blocks to JSON...
+2025-11-05 17:55:38,232 - src.data.convertor - INFO - Converted 423 blocks to data/processed/converted_data_20251105_175538.json
+2025-11-05 17:55:38,232 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251105_175538.json
+2025-11-05 17:55:38,233 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.07 seconds
+2025-11-05 17:55:38,233 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-11-05 17:55:38,372 - src.data.validator - INFO - Validation: 423 valid, 0 rejected
+2025-11-05 17:55:38,372 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 423, 'valid': 423, 'rejected': 0, 'rejection_reasons': {'too_short': 0, 'too_long': 0, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-11-05 17:55:38,518 - src.data.validator - INFO - Removed 0 duplicates, 423 unique blocks
+2025-11-05 17:55:38,694 - src.data.validator - INFO - Quality filter: Kept 423, removed 0
+2025-11-05 17:55:38,694 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 0.46 seconds
+2025-11-05 17:55:38,694 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-11-05 17:55:38,694 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 423 blocks...
+2025-11-05 17:55:38,694 - src.extraction.kg_builder - INFO - Processing 423 blocks in batches of 50
+2025-11-05 18:00:24,419 - src.extraction.kg_builder - INFO - Extracted 451807 entities and 3344118 relationships
+2025-11-05 18:00:24,419 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 285.73 seconds
+2025-11-05 18:00:24,419 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-11-05 18:00:24,419 - src.pipeline.orchestrator - INFO - Saving extraction results...
+2025-11-05 18:00:26,709 - src.storage.file_saver - INFO - Saved 451807 entities to data/output/entities/entities_20251105_180024.json
+2025-11-05 18:00:28,449 - src.storage.file_saver - INFO - Saved 451807 entities to CSV: data/output/entities/entities_20251105_180024.csv
+2025-11-05 18:01:31,514 - src.storage.file_saver - INFO - Saved 3344118 relationships to data/output/relationships/relationships_20251105_180024.json
+2025-11-05 18:01:48,669 - src.storage.file_saver - INFO - Saved 3344118 relationships to CSV: data/output/relationships/relationships_20251105_180024.csv
+2025-11-05 18:01:49,415 - src.storage.file_saver - INFO - Saved extraction report to data/output/reports/extraction_report_20251105_180024.json
+2025-11-05 18:01:49,415 - src.storage.file_saver - INFO - Saved all extraction results with timestamp 20251105_180024
+2025-11-05 18:01:49,415 - src.storage.file_saver - INFO - Saved extractor state to data/output/extractor_state.json
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO - Created 6 output files
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO -   entities_json: data/output/entities/entities_20251105_180024.json
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO -   entities_csv: data/output/entities/entities_20251105_180024.csv
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO -   relationships_json: data/output/relationships/relationships_20251105_180024.json
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO -   relationships_csv: data/output/relationships/relationships_20251105_180024.csv
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO -   report: data/output/reports/extraction_report_20251105_180024.json
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO -   state: data/output/extractor_state.json
+2025-11-05 18:01:49,415 - src.pipeline.monitoring - INFO - Stage 'Storage' completed in 85.00 seconds
+2025-11-05 18:01:49,415 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' started
+2025-11-05 18:01:49,415 - src.pipeline.orchestrator - INFO - Exporting to Neo4j...
+2025-11-05 18:01:49,416 - src.storage.optimized_neo4j_connector - ERROR - ❌ Failed to connect to Neo4j: Couldn't connect to localhost:7687 (resolved to ('127.0.0.1:7687',)):
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7687)) (reason [Errno 111] Connection refused)
+2025-11-05 18:01:49,416 - src.pipeline.monitoring - ERROR - Error in Neo4j Export: Failed to connect to Neo4j
+2025-11-05 18:01:49,416 - src.pipeline.orchestrator - ERROR - Neo4j export failed: Failed to connect to Neo4j
+2025-11-05 18:01:49,416 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' completed in 0.00 seconds
+2025-11-05 18:01:49,416 - src.pipeline.monitoring - INFO - Pipeline execution completed in 371.27 seconds
+2025-11-05 18:01:49,416 - src.storage.file_saver - INFO - Created summary report: data/output/reports/summary_20251105_180149.txt
+2025-11-05 18:01:49,416 - src.pipeline.orchestrator - INFO - Pipeline execution completed successfully!
+2025-11-06 15:19:41,903 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-11-06 15:19:42,113 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-11-06 15:19:42,113 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-11-06 15:19:42,113 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-11-06 15:19:42,113 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-11-06 15:19:42,114 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-11-06 15:19:42,146 - src.data.ingestion - INFO - Loaded 600 blocks from new_cleaned_data.json
+2025-11-06 15:19:42,190 - src.data.ingestion - INFO - Loaded 598 blocks from cleaned_Procurement Tactics.json
+2025-11-06 15:19:42,192 - src.data.ingestion - INFO - Loaded 97 blocks from cleaned_ProcureAbility.json
+2025-11-06 15:19:42,204 - src.data.ingestion - INFO - Loaded 423 blocks from cleaned_Glossary_Procurement Tactics(1).json
+2025-11-06 15:19:42,204 - src.data.ingestion - INFO - Total: Loaded 1718 blocks from 4 files
+2025-11-06 15:19:42,204 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 1718, 'total_characters': 41810381, 'avg_text_length': 24336.659487776484, 'source_types': {'json': 1718}, 'source_files': {'new_cleaned_data.json': 600, 'cleaned_Procurement Tactics.json': 598, 'cleaned_ProcureAbility.json': 97, 'cleaned_Glossary_Procurement Tactics(1).json': 423}}
+2025-11-06 15:19:42,204 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.09 seconds
+2025-11-06 15:19:42,204 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-11-06 15:19:42,204 - src.pipeline.orchestrator - INFO - Converting 1718 blocks to JSON...
+2025-11-06 15:19:42,735 - src.data.convertor - INFO - Converted 1718 blocks to data/processed/converted_data_20251106_151942.json
+2025-11-06 15:19:42,735 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251106_151942.json
+2025-11-06 15:19:42,735 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.53 seconds
+2025-11-06 15:19:42,735 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-11-06 15:19:43,718 - src.data.validator - INFO - Validation: 1702 valid, 16 rejected
+2025-11-06 15:19:43,718 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 1718, 'valid': 1702, 'rejected': 16, 'rejection_reasons': {'too_short': 0, 'too_long': 16, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-11-06 15:19:44,827 - src.data.validator - INFO - Removed 2 duplicates, 1700 unique blocks
+2025-11-06 15:19:46,106 - src.data.validator - INFO - Quality filter: Kept 1700, removed 0
+2025-11-06 15:19:46,106 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 3.37 seconds
+2025-11-06 15:19:46,107 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-11-06 15:19:46,107 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 1700 blocks...
+2025-11-06 15:19:46,107 - src.extraction.kg_builder - INFO - Processing 1700 blocks in batches of 50
+2025-11-06 16:56:40,297 - src.extraction.kg_builder - INFO - Extracted 3609147 entities and 40559658 relationships
+2025-11-06 16:56:40,304 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 5814.20 seconds
+2025-11-06 16:56:40,304 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-11-06 16:56:40,304 - src.pipeline.orchestrator - INFO - Saving extraction results...
+2025-11-06 16:57:03,443 - src.storage.file_saver - INFO - Saved 3609147 entities to data/output/entities/entities_20251106_165640.json
+2025-11-06 16:57:20,067 - src.storage.file_saver - INFO - Saved 3609147 entities to CSV: data/output/entities/entities_20251106_165640.csv
+2025-11-06 17:16:20,807 - src.storage.file_saver - INFO - Saved 40559658 relationships to data/output/relationships/relationships_20251106_165640.json
+2025-11-10 12:18:30,923 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-11-10 12:18:31,149 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-11-10 12:18:31,150 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-11-10 12:18:31,150 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-11-10 12:18:31,150 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-11-10 12:18:31,150 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-11-10 12:18:31,182 - src.data.ingestion - INFO - Loaded 600 blocks from new_cleaned_data.json
+2025-11-10 12:18:31,225 - src.data.ingestion - INFO - Loaded 598 blocks from cleaned_Procurement Tactics.json
+2025-11-10 12:18:31,227 - src.data.ingestion - INFO - Loaded 97 blocks from cleaned_ProcureAbility.json
+2025-11-10 12:18:31,238 - src.data.ingestion - INFO - Loaded 423 blocks from cleaned_Glossary_Procurement Tactics(1).json
+2025-11-10 12:18:31,238 - src.data.ingestion - INFO - Total: Loaded 1718 blocks from 4 files
+2025-11-10 12:18:31,239 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 1718, 'total_characters': 41810381, 'avg_text_length': 24336.659487776484, 'source_types': {'json': 1718}, 'source_files': {'new_cleaned_data.json': 600, 'cleaned_Procurement Tactics.json': 598, 'cleaned_ProcureAbility.json': 97, 'cleaned_Glossary_Procurement Tactics(1).json': 423}}
+2025-11-10 12:18:31,239 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.09 seconds
+2025-11-10 12:18:31,239 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-11-10 12:18:31,239 - src.pipeline.orchestrator - INFO - Converting 1718 blocks to JSON...
+2025-11-10 12:18:31,748 - src.data.convertor - INFO - Converted 1718 blocks to data/processed/converted_data_20251110_121831.json
+2025-11-10 12:18:31,748 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251110_121831.json
+2025-11-10 12:18:31,748 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.51 seconds
+2025-11-10 12:18:31,748 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-11-10 12:18:32,714 - src.data.validator - INFO - Validation: 1702 valid, 16 rejected
+2025-11-10 12:18:32,715 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 1718, 'valid': 1702, 'rejected': 16, 'rejection_reasons': {'too_short': 0, 'too_long': 16, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-11-10 12:18:33,753 - src.data.validator - INFO - Removed 2 duplicates, 1700 unique blocks
+2025-11-10 12:18:34,978 - src.data.validator - INFO - Quality filter: Kept 1700, removed 0
+2025-11-10 12:18:34,979 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 3.23 seconds
+2025-11-10 12:18:34,979 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-11-10 12:18:34,979 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 1700 blocks...
+2025-11-10 12:18:34,979 - src.extraction.kg_builder - INFO - Processing 1700 blocks in batches of 50
+2025-11-10 13:53:54,831 - src.extraction.kg_builder - INFO - Extracted 3609147 entities and 40559658 relationships
+2025-11-10 13:53:54,835 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 5719.86 seconds
+2025-11-10 13:53:54,835 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-11-10 13:53:54,835 - src.pipeline.orchestrator - INFO - Saving extraction results...
+2025-11-10 13:54:19,675 - src.storage.file_saver - INFO - Saved 3609147 entities to data/output/entities/entities_20251110_135354.json
+2025-11-10 13:54:34,168 - src.storage.file_saver - INFO - Saved 3609147 entities to CSV: data/output/entities/entities_20251110_135354.csv
+2025-11-10 13:54:37,917 - src.storage.file_saver - INFO - Filtered relationships: 40,559,658 → 3,094,911 (7.6%)
+2025-11-10 13:56:29,177 - src.storage.file_saver - INFO - Filtered to 3,094,911 high-confidence relationships (>= 0.75)
+2025-11-10 13:56:53,982 - src.storage.file_saver - INFO - Saved 3094911 relationships to CSV: data/output/relationships/relationships_20251110_135354.csv
+2025-11-10 13:56:56,519 - src.storage.file_saver - INFO - Saved extraction report to data/output/reports/extraction_report_20251110_135354.json
+2025-11-10 13:56:56,519 - src.storage.file_saver - INFO - Saved all extraction results with timestamp 20251110_135354
+2025-11-10 13:56:56,520 - src.storage.file_saver - INFO - Saved extractor state to data/output/extractor_state.json
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO - Created 6 output files
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO -   entities_json: data/output/entities/entities_20251110_135354.json
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO -   entities_csv: data/output/entities/entities_20251110_135354.csv
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO -   relationships_json: None
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO -   relationships_csv: data/output/relationships/relationships_20251110_135354.csv
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO -   report: data/output/reports/extraction_report_20251110_135354.json
+2025-11-10 13:56:56,520 - src.pipeline.orchestrator - INFO -   state: data/output/extractor_state.json
+2025-11-10 13:56:56,521 - src.pipeline.monitoring - INFO - Stage 'Storage' completed in 181.69 seconds
+2025-11-10 13:56:56,521 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' started
+2025-11-10 13:56:56,521 - src.pipeline.orchestrator - INFO - Exporting to Neo4j...
+2025-11-10 13:56:56,558 - src.storage.optimized_neo4j_connector - ERROR - ❌ Failed to connect to Neo4j: Couldn't connect to localhost:7692 (resolved to ('127.0.0.1:7692',)):
+Failed to establish connection to ResolvedIPv4Address(('127.0.0.1', 7692)) (reason [Errno 111] Connection refused)
+2025-11-10 13:56:56,558 - src.pipeline.monitoring - ERROR - Error in Neo4j Export: Failed to connect to Neo4j
+2025-11-10 13:56:56,558 - src.pipeline.orchestrator - ERROR - Neo4j export failed: Failed to connect to Neo4j
+2025-11-10 13:56:56,558 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' completed in 0.04 seconds
+2025-11-10 13:56:56,558 - src.pipeline.monitoring - INFO - Pipeline execution completed in 5905.41 seconds
+2025-11-10 13:56:56,559 - src.storage.file_saver - INFO - Created summary report: data/output/reports/summary_20251110_135656.txt
+2025-11-10 13:56:56,559 - src.pipeline.orchestrator - INFO - Pipeline execution completed successfully!
+2025-11-13 12:30:38,097 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-11-13 12:30:38,343 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-11-13 12:30:38,343 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-11-13 12:30:38,343 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-11-13 12:30:38,343 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-11-13 12:30:38,343 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-11-13 12:30:38,376 - src.data.ingestion - INFO - Loaded 600 blocks from new_cleaned_data.json
+2025-11-13 12:30:38,420 - src.data.ingestion - INFO - Loaded 598 blocks from cleaned_Procurement Tactics.json
+2025-11-13 12:30:38,421 - src.data.ingestion - INFO - Loaded 97 blocks from cleaned_ProcureAbility.json
+2025-11-13 12:30:38,433 - src.data.ingestion - INFO - Loaded 423 blocks from cleaned_Glossary_Procurement Tactics(1).json
+2025-11-13 12:30:38,433 - src.data.ingestion - INFO - Total: Loaded 1718 blocks from 4 files
+2025-11-13 12:30:38,433 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 1718, 'total_characters': 41810381, 'avg_text_length': 24336.659487776484, 'source_types': {'json': 1718}, 'source_files': {'new_cleaned_data.json': 600, 'cleaned_Procurement Tactics.json': 598, 'cleaned_ProcureAbility.json': 97, 'cleaned_Glossary_Procurement Tactics(1).json': 423}}
+2025-11-13 12:30:38,434 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.09 seconds
+2025-11-13 12:30:38,434 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-11-13 12:30:38,434 - src.pipeline.orchestrator - INFO - Converting 1718 blocks to JSON...
+2025-11-13 12:30:38,954 - src.data.convertor - INFO - Converted 1718 blocks to data/processed/converted_data_20251113_123038.json
+2025-11-13 12:30:38,954 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251113_123038.json
+2025-11-13 12:30:38,954 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.52 seconds
+2025-11-13 12:30:38,954 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-11-13 12:30:39,935 - src.data.validator - INFO - Validation: 1702 valid, 16 rejected
+2025-11-13 12:30:39,935 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 1718, 'valid': 1702, 'rejected': 16, 'rejection_reasons': {'too_short': 0, 'too_long': 16, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-11-13 12:30:41,031 - src.data.validator - INFO - Removed 2 duplicates, 1700 unique blocks
+2025-11-13 12:30:42,332 - src.data.validator - INFO - Quality filter: Kept 1700, removed 0
+2025-11-13 12:30:42,333 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 3.38 seconds
+2025-11-13 12:30:42,333 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-11-13 12:30:42,333 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 1700 blocks...
+2025-11-13 12:30:42,333 - src.extraction.kg_builder - INFO - Processing 1700 blocks in batches of 50
+2025-11-13 14:13:50,827 - src.extraction.kg_builder - INFO - Extracted 3609147 entities and 40559658 relationships
+2025-11-13 14:13:50,833 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 6188.50 seconds
+2025-11-13 14:13:50,833 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-11-13 14:13:50,834 - src.pipeline.orchestrator - INFO - ⚡ Skipping file storage (direct Neo4j import mode)
+2025-11-13 14:13:50,834 - src.pipeline.monitoring - ERROR - Error in Pipeline: cannot access local variable 'datetime' where it is not associated with a value
+2025-11-13 14:13:50,834 - src.pipeline.orchestrator - ERROR - Pipeline execution failed: cannot access local variable 'datetime' where it is not associated with a value
+Traceback (most recent call last):
+  File "/home/user/PROJECT/Kg_without_saving_ouput_data/src/pipeline/orchestrator.py", line 171, in run
+    saved_files = self._run_storage(extraction_result)
+  File "/home/user/PROJECT/Kg_without_saving_ouput_data/src/pipeline/orchestrator.py", line 303, in _run_storage
+    'timestamp': datetime.now().isoformat(),
+                 ^^^^^^^^
+UnboundLocalError: cannot access local variable 'datetime' where it is not associated with a value
+2025-11-13 14:25:23,445 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-11-13 14:25:23,695 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-11-13 14:25:23,695 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-11-13 14:25:23,695 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-11-13 14:25:23,695 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-11-13 14:25:23,695 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-11-13 14:25:23,697 - src.data.ingestion - INFO - Loaded 97 blocks from cleaned_ProcureAbility.json
+2025-11-13 14:25:23,697 - src.data.ingestion - INFO - Total: Loaded 97 blocks from 1 files
+2025-11-13 14:25:23,697 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 97, 'total_characters': 481243, 'avg_text_length': 4961.268041237114, 'source_types': {'json': 97}, 'source_files': {'cleaned_ProcureAbility.json': 97}}
+2025-11-13 14:25:23,698 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.00 seconds
+2025-11-13 14:25:23,698 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-11-13 14:25:23,698 - src.pipeline.orchestrator - INFO - Converting 97 blocks to JSON...
+2025-11-13 14:25:23,705 - src.data.convertor - INFO - Converted 97 blocks to data/processed/converted_data_20251113_142523.json
+2025-11-13 14:25:23,705 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251113_142523.json
+2025-11-13 14:25:23,705 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.01 seconds
+2025-11-13 14:25:23,705 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-11-13 14:25:23,717 - src.data.validator - INFO - Validation: 97 valid, 0 rejected
+2025-11-13 14:25:23,717 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 97, 'valid': 97, 'rejected': 0, 'rejection_reasons': {'too_short': 0, 'too_long': 0, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-11-13 14:25:23,731 - src.data.validator - INFO - Removed 0 duplicates, 97 unique blocks
+2025-11-13 14:25:23,747 - src.data.validator - INFO - Quality filter: Kept 97, removed 0
+2025-11-13 14:25:23,747 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 0.04 seconds
+2025-11-13 14:25:23,747 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-11-13 14:25:23,747 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 97 blocks...
+2025-11-13 14:25:23,747 - src.extraction.kg_builder - INFO - Processing 97 blocks in batches of 50
+2025-11-13 14:25:45,930 - src.extraction.kg_builder - INFO - Extracted 40021 entities and 362722 relationships
+2025-11-13 14:25:45,930 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 22.18 seconds
+2025-11-13 14:25:45,930 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-11-13 14:25:45,931 - src.pipeline.orchestrator - INFO - ⚡ Skipping file storage (direct Neo4j import mode)
+2025-11-13 14:25:45,931 - src.pipeline.orchestrator - INFO - 💾 Saved minimal summary: data/output/pipeline_summary_20251113_142545.json (~1KB)
+2025-11-13 14:25:45,931 - src.pipeline.orchestrator - INFO -    Entities: 40,021
+2025-11-13 14:25:45,931 - src.pipeline.orchestrator - INFO -    Relationships: 362,722
+2025-11-13 14:25:45,931 - src.pipeline.monitoring - INFO - Stage 'Storage' completed in 0.00 seconds
+2025-11-13 14:25:45,931 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' started
+2025-11-13 14:25:45,931 - src.pipeline.orchestrator - INFO - Exporting to Neo4j...
+2025-11-13 14:25:47,891 - src.storage.optimized_neo4j_connector - INFO - ✅ Connected to Neo4j at bolt://localhost:7692
+2025-11-13 14:25:47,891 - src.storage.optimized_neo4j_connector - INFO - Clearing existing data...
+2025-11-13 14:26:00,754 - src.storage.optimized_neo4j_connector - INFO - ✅ Database cleared
+2025-11-13 14:26:00,754 - src.storage.optimized_neo4j_connector - INFO - Creating entity ID constraint...
+2025-11-13 14:26:18,041 - src.storage.optimized_neo4j_connector - INFO - ✅ ID constraint created
+2025-11-13 14:26:18,041 - src.storage.optimized_neo4j_connector - INFO - ⚡ NO FILTERING - Importing ALL data
+2025-11-13 14:26:18,041 - src.storage.optimized_neo4j_connector - INFO -    Entities: 40,021
+2025-11-13 14:26:18,041 - src.storage.optimized_neo4j_connector - INFO -    Relationships: 362,722
+2025-11-13 14:26:18,041 - src.storage.optimized_neo4j_connector - INFO - Importing 40,021 entities in batches of 5,000...
+2025-11-13 14:26:18,076 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE CONSTRAINT entity_id IF NOT EXISTS FOR (e:Entity) REQUIRE (e.id) IS UNIQUE' has no effect. The index or constraint specified by 'CONSTRAINT entity_id FOR (e:Entity) REQUIRE (e.id) IS UNIQUE' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE CONSTRAINT entity_id IF NOT EXISTS FOR (e:Entity) REQUIRE e.id IS UNIQUE'
+2025-11-13 14:26:20,385 - src.storage.optimized_neo4j_connector - INFO - ✅ Imported 40,021 entities
+2025-11-13 14:26:20,385 - src.storage.optimized_neo4j_connector - INFO - Importing 362,722 relationships in batches of 2,000...
+2025-11-13 14:26:30,360 - src.storage.optimized_neo4j_connector - INFO - ✅ Imported 362,722 relationships
+2025-11-13 14:26:30,378 - src.storage.optimized_neo4j_connector - INFO - Creating search indexes (this may take 1-2 minutes)...
+2025-11-13 14:26:30,422 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created text index
+2025-11-13 14:26:30,423 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_text_idx IF NOT EXISTS FOR (e:Entity) ON (e.text)' has no effect. The index or constraint specified by 'RANGE INDEX entity_text_idx FOR (e:Entity) ON (e.text)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_text_idx IF NOT EXISTS FOR (e:Entity) ON (e.text)'
+2025-11-13 14:26:30,433 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created label index
+2025-11-13 14:26:30,434 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_label_idx IF NOT EXISTS FOR (e:Entity) ON (e.label)' has no effect. The index or constraint specified by 'RANGE INDEX entity_label_idx FOR (e:Entity) ON (e.label)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_label_idx IF NOT EXISTS FOR (e:Entity) ON (e.label)'
+2025-11-13 14:26:30,446 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created block_id index
+2025-11-13 14:26:30,446 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_block_idx IF NOT EXISTS FOR (e:Entity) ON (e.block_id)' has no effect. The index or constraint specified by 'RANGE INDEX entity_block_idx FOR (e:Entity) ON (e.block_id)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_block_idx IF NOT EXISTS FOR (e:Entity) ON (e.block_id)'
+2025-11-13 14:26:30,468 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created confidence index
+2025-11-13 14:26:30,542 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created fulltext index
+2025-11-13 14:26:30,542 - src.storage.optimized_neo4j_connector - INFO - ✅ All indexes created!
+2025-11-13 14:26:30,543 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE FULLTEXT INDEX entity_fulltext_idx IF NOT EXISTS FOR (e:Entity) ON EACH [e.text, e.label]' has no effect. The index or constraint specified by 'FULLTEXT INDEX entity_fulltext_idx FOR (e:Entity) ON EACH [e.text, e.label]' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE FULLTEXT INDEX entity_fulltext_idx IF NOT EXISTS \n               FOR (e:Entity) ON EACH [e.text, e.label]'
+2025-11-13 14:26:30,961 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-11-13 14:26:30,961 - src.storage.optimized_neo4j_connector - INFO - ✅ NEO4J EXPORT COMPLETE
+2025-11-13 14:26:30,962 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-11-13 14:26:30,962 - src.storage.optimized_neo4j_connector - INFO - Entities: 40,021
+2025-11-13 14:26:30,962 - src.storage.optimized_neo4j_connector - INFO - Relationships: 362,722
+2025-11-13 14:26:30,962 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-11-13 14:26:30,962 - src.pipeline.orchestrator - INFO - Neo4j export completed: {'total_nodes': 40021, 'total_relationships': 362722, 'entity_types': [{'type': 'NOUN_PHRASE', 'count': 18135}, {'type': 'NOUN', 'count': 16805}, {'type': 'PROPN', 'count': 2842}, {'type': 'ORG', 'count': 744}, {'type': 'CARDINAL', 'count': 433}, {'type': 'DATE', 'count': 415}, {'type': 'PERSON', 'count': 291}, {'type': 'GPE', 'count': 140}, {'type': 'ORDINAL', 'count': 77}, {'type': 'NORP', 'count': 29}], 'relationship_types': [{'type': 'DIRECT_CONNECTION', 'count': 55953}, {'type': 'OF', 'count': 10784}, {'type': 'AND', 'count': 7862}, {'type': 'IN', 'count': 4396}, {'type': 'FOR', 'count': 3964}, {'type': 'TO', 'count': 2864}, {'type': 'WITH', 'count': 2245}, {'type': 'ON', 'count': 1578}, {'type': 'AS', 'count': 1470}, {'type': 'HAVE', 'count': 1467}], 'entities_imported': 40021, 'relationships_imported': 362722}
+2025-11-13 14:26:30,962 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' completed in 45.03 seconds
+2025-11-13 14:26:30,962 - src.pipeline.monitoring - INFO - Pipeline execution completed in 67.27 seconds
+2025-11-13 14:26:30,962 - src.storage.file_saver - INFO - Created summary report: data/output/reports/summary_20251113_142630.txt
+2025-11-13 14:26:30,962 - src.pipeline.orchestrator - INFO - Pipeline execution completed successfully!
+2025-11-13 14:31:40,989 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-11-13 14:31:41,197 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-11-13 14:31:41,197 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-11-13 14:31:41,197 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-11-13 14:31:41,197 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-11-13 14:31:41,197 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-11-13 14:31:41,230 - src.data.ingestion - INFO - Loaded 600 blocks from new_cleaned_data.json
+2025-11-13 14:31:41,274 - src.data.ingestion - INFO - Loaded 598 blocks from cleaned_Procurement Tactics.json
+2025-11-13 14:31:41,275 - src.data.ingestion - INFO - Loaded 97 blocks from cleaned_ProcureAbility.json
+2025-11-13 14:31:41,287 - src.data.ingestion - INFO - Loaded 423 blocks from cleaned_Glossary_Procurement Tactics(1).json
+2025-11-13 14:31:41,287 - src.data.ingestion - INFO - Total: Loaded 1718 blocks from 4 files
+2025-11-13 14:31:41,287 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 1718, 'total_characters': 41810381, 'avg_text_length': 24336.659487776484, 'source_types': {'json': 1718}, 'source_files': {'new_cleaned_data.json': 600, 'cleaned_Procurement Tactics.json': 598, 'cleaned_ProcureAbility.json': 97, 'cleaned_Glossary_Procurement Tactics(1).json': 423}}
+2025-11-13 14:31:41,287 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.09 seconds
+2025-11-13 14:31:41,287 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-11-13 14:31:41,287 - src.pipeline.orchestrator - INFO - Converting 1718 blocks to JSON...
+2025-11-13 14:31:41,811 - src.data.convertor - INFO - Converted 1718 blocks to data/processed/converted_data_20251113_143141.json
+2025-11-13 14:31:41,811 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251113_143141.json
+2025-11-13 14:31:41,811 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.52 seconds
+2025-11-13 14:31:41,811 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-11-13 14:31:42,804 - src.data.validator - INFO - Validation: 1702 valid, 16 rejected
+2025-11-13 14:31:42,805 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 1718, 'valid': 1702, 'rejected': 16, 'rejection_reasons': {'too_short': 0, 'too_long': 16, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-11-13 14:31:43,885 - src.data.validator - INFO - Removed 2 duplicates, 1700 unique blocks
+2025-11-13 14:31:45,161 - src.data.validator - INFO - Quality filter: Kept 1700, removed 0
+2025-11-13 14:31:45,162 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 3.35 seconds
+2025-11-13 14:31:45,162 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-11-13 14:31:45,162 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 1700 blocks...
+2025-11-13 14:31:45,162 - src.extraction.kg_builder - INFO - Processing 1700 blocks in batches of 50
+2025-11-13 16:18:18,733 - src.extraction.kg_builder - INFO - Extracted 3609147 entities and 40559658 relationships
+2025-11-13 16:18:18,738 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 6393.58 seconds
+2025-11-13 16:18:18,738 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-11-13 16:18:18,738 - src.pipeline.orchestrator - INFO - ⚡ Skipping file storage (direct Neo4j import mode)
+2025-11-13 16:18:18,748 - src.pipeline.orchestrator - INFO - 💾 Saved minimal summary: data/output/pipeline_summary_20251113_161818.json (~1KB)
+2025-11-13 16:18:18,748 - src.pipeline.orchestrator - INFO -    Entities: 3,609,147
+2025-11-13 16:18:18,748 - src.pipeline.orchestrator - INFO -    Relationships: 40,559,658
+2025-11-13 16:18:18,748 - src.pipeline.monitoring - INFO - Stage 'Storage' completed in 0.01 seconds
+2025-11-13 16:18:18,748 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' started
+2025-11-13 16:18:18,748 - src.pipeline.orchestrator - INFO - Exporting to Neo4j...
+2025-11-13 16:18:18,932 - src.storage.optimized_neo4j_connector - INFO - ✅ Connected to Neo4j at bolt://localhost:7692
+2025-11-13 16:18:18,932 - src.storage.optimized_neo4j_connector - INFO - Clearing existing data...
+2025-11-13 16:18:25,246 - src.storage.optimized_neo4j_connector - INFO - ✅ Database cleared
+2025-11-13 16:18:25,246 - src.storage.optimized_neo4j_connector - INFO - Creating entity ID constraint...
+2025-11-13 16:18:46,673 - src.storage.optimized_neo4j_connector - INFO - ✅ ID constraint created
+2025-11-13 16:18:46,674 - src.storage.optimized_neo4j_connector - INFO - ⚡ NO FILTERING - Importing ALL data
+2025-11-13 16:18:46,674 - src.storage.optimized_neo4j_connector - INFO -    Entities: 3,609,147
+2025-11-13 16:18:46,674 - src.storage.optimized_neo4j_connector - INFO -    Relationships: 40,559,658
+2025-11-13 16:18:46,674 - src.storage.optimized_neo4j_connector - INFO - Importing 3,609,147 entities in batches of 5,000...
+2025-11-13 16:18:52,081 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE CONSTRAINT entity_id IF NOT EXISTS FOR (e:Entity) REQUIRE (e.id) IS UNIQUE' has no effect. The index or constraint specified by 'CONSTRAINT entity_id FOR (e:Entity) REQUIRE (e.id) IS UNIQUE' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE CONSTRAINT entity_id IF NOT EXISTS FOR (e:Entity) REQUIRE e.id IS UNIQUE'
+2025-11-13 16:21:16,308 - src.storage.optimized_neo4j_connector - INFO - ✅ Imported 3,609,147 entities
+2025-11-13 16:21:16,608 - src.storage.optimized_neo4j_connector - INFO - Importing 40,559,658 relationships in batches of 2,000...
+2025-11-13 16:40:53,637 - src.storage.optimized_neo4j_connector - INFO - ✅ Imported 40,559,658 relationships
+2025-11-13 16:40:56,408 - src.storage.optimized_neo4j_connector - INFO - Creating search indexes (this may take 1-2 minutes)...
+2025-11-13 16:40:56,426 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created text index
+2025-11-13 16:40:56,427 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_text_idx IF NOT EXISTS FOR (e:Entity) ON (e.text)' has no effect. The index or constraint specified by 'RANGE INDEX entity_text_idx FOR (e:Entity) ON (e.text)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_text_idx IF NOT EXISTS FOR (e:Entity) ON (e.text)'
+2025-11-13 16:40:56,437 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created label index
+2025-11-13 16:40:56,437 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_label_idx IF NOT EXISTS FOR (e:Entity) ON (e.label)' has no effect. The index or constraint specified by 'RANGE INDEX entity_label_idx FOR (e:Entity) ON (e.label)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_label_idx IF NOT EXISTS FOR (e:Entity) ON (e.label)'
+2025-11-13 16:40:56,445 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created block_id index
+2025-11-13 16:40:56,446 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_block_idx IF NOT EXISTS FOR (e:Entity) ON (e.block_id)' has no effect. The index or constraint specified by 'RANGE INDEX entity_block_idx FOR (e:Entity) ON (e.block_id)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_block_idx IF NOT EXISTS FOR (e:Entity) ON (e.block_id)'
+2025-11-13 16:40:56,453 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created confidence index
+2025-11-13 16:40:56,454 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE RANGE INDEX entity_confidence_idx IF NOT EXISTS FOR (e:Entity) ON (e.confidence)' has no effect. The index or constraint specified by 'RANGE INDEX entity_confidence_idx FOR (e:Entity) ON (e.confidence)' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE INDEX entity_confidence_idx IF NOT EXISTS FOR (e:Entity) ON (e.confidence)'
+2025-11-13 16:40:56,459 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created fulltext index
+2025-11-13 16:40:56,459 - src.storage.optimized_neo4j_connector - INFO - ✅ All indexes created!
+2025-11-13 16:40:56,460 - neo4j.notifications - INFO - Received notification from DBMS server: <GqlStatusObject gql_status='00NA0', status_description="note: successful completion - index or constraint already exists. The command 'CREATE FULLTEXT INDEX entity_fulltext_idx IF NOT EXISTS FOR (e:Entity) ON EACH [e.text, e.label]' has no effect. The index or constraint specified by 'FULLTEXT INDEX entity_fulltext_idx FOR (e:Entity) ON EACH [e.text, e.label]' already exists.", position=None, raw_classification='SCHEMA', classification=<NotificationClassification.SCHEMA: 'SCHEMA'>, raw_severity='INFORMATION', severity=<NotificationSeverity.INFORMATION: 'INFORMATION'>, diagnostic_record={'_classification': 'SCHEMA', '_severity': 'INFORMATION', 'OPERATION': '', 'OPERATION_CODE': '0', 'CURRENT_SCHEMA': '/'}> for query: 'CREATE FULLTEXT INDEX entity_fulltext_idx IF NOT EXISTS \n               FOR (e:Entity) ON EACH [e.text, e.label]'
+2025-11-13 16:41:16,631 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-11-13 16:41:16,631 - src.storage.optimized_neo4j_connector - INFO - ✅ NEO4J EXPORT COMPLETE
+2025-11-13 16:41:16,631 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-11-13 16:41:16,631 - src.storage.optimized_neo4j_connector - INFO - Entities: 3,609,147
+2025-11-13 16:41:16,631 - src.storage.optimized_neo4j_connector - INFO - Relationships: 40,559,658
+2025-11-13 16:41:16,631 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-11-13 16:41:16,632 - src.pipeline.orchestrator - INFO - Neo4j export completed: {'total_nodes': 3609147, 'total_relationships': 40559658, 'entity_types': [{'type': 'NOUN_PHRASE', 'count': 1479640}, {'type': 'NOUN', 'count': 1296117}, {'type': 'PROPN', 'count': 560021}, {'type': 'CARDINAL', 'count': 76608}, {'type': 'ORG', 'count': 60091}, {'type': 'PERSON', 'count': 35741}, {'type': 'DATE', 'count': 28204}, {'type': 'GPE', 'count': 24980}, {'type': 'NORP', 'count': 7954}, {'type': 'ORDINAL', 'count': 7057}], 'relationship_types': [{'type': 'DIRECT_CONNECTION', 'count': 14308399}, {'type': 'OF', 'count': 853256}, {'type': 'AND', 'count': 627111}, {'type': 'SQUASH', 'count': 555205}, {'type': 'IN', 'count': 513779}, {'type': 'UPLOAD', 'count': 413433}, {'type': 'ANSWER', 'count': 348002}, {'type': 'FOR', 'count': 319852}, {'type': 'SIZE', 'count': 310604}, {'type': 'UPLOAD_SIZE', 'count': 237424}], 'entities_imported': 3609147, 'relationships_imported': 40559658}
+2025-11-13 16:41:16,634 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' completed in 1377.89 seconds
+2025-11-13 16:41:16,635 - src.pipeline.monitoring - INFO - Pipeline execution completed in 7775.44 seconds
+2025-11-13 16:41:16,651 - src.storage.file_saver - INFO - Created summary report: data/output/reports/summary_20251113_164116.txt
+2025-11-13 16:41:16,651 - src.pipeline.orchestrator - INFO - Pipeline execution completed successfully!
+2025-12-01 14:40:10,392 - src.pipeline.orchestrator - INFO - Initializing pipeline components...
+2025-12-01 14:40:10,618 - src.pipeline.orchestrator - INFO - Loaded spaCy model: en_core_web_sm
+2025-12-01 14:40:10,618 - src.pipeline.orchestrator - INFO - All components initialized successfully
+2025-12-01 14:40:10,618 - src.pipeline.monitoring - INFO - Pipeline execution started
+2025-12-01 14:40:10,618 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' started
+2025-12-01 14:40:10,618 - src.pipeline.orchestrator - INFO - Loading data from data/raw...
+2025-12-01 14:40:10,658 - src.data.ingestion - INFO - Loaded 600 blocks from new_cleaned_data.json
+2025-12-01 14:40:10,707 - src.data.ingestion - INFO - Loaded 598 blocks from cleaned_Procurement Tactics.json
+2025-12-01 14:40:10,709 - src.data.ingestion - INFO - Loaded 97 blocks from cleaned_ProcureAbility.json
+2025-12-01 14:40:10,722 - src.data.ingestion - INFO - Loaded 423 blocks from cleaned_Glossary_Procurement Tactics(1).json
+2025-12-01 14:40:10,722 - src.data.ingestion - INFO - Total: Loaded 1718 blocks from 4 files
+2025-12-01 14:40:10,723 - src.pipeline.orchestrator - INFO - Ingestion stats: {'total_blocks': 1718, 'total_characters': 41810381, 'avg_text_length': 24336.659487776484, 'source_types': {'json': 1718}, 'source_files': {'new_cleaned_data.json': 600, 'cleaned_Procurement Tactics.json': 598, 'cleaned_ProcureAbility.json': 97, 'cleaned_Glossary_Procurement Tactics(1).json': 423}}
+2025-12-01 14:40:10,723 - src.pipeline.monitoring - INFO - Stage 'Data Ingestion' completed in 0.10 seconds
+2025-12-01 14:40:10,723 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' started
+2025-12-01 14:40:10,723 - src.pipeline.orchestrator - INFO - Converting 1718 blocks to JSON...
+2025-12-01 14:40:11,234 - src.data.convertor - INFO - Converted 1718 blocks to data/processed/converted_data_20251201_144010.json
+2025-12-01 14:40:11,235 - src.pipeline.orchestrator - INFO - Created JSON file: data/processed/converted_data_20251201_144010.json
+2025-12-01 14:40:11,235 - src.pipeline.monitoring - INFO - Stage 'Data Conversion' completed in 0.51 seconds
+2025-12-01 14:40:11,235 - src.pipeline.monitoring - INFO - Stage 'Data Validation' started
+2025-12-01 14:40:12,201 - src.data.validator - INFO - Validation: 1702 valid, 16 rejected
+2025-12-01 14:40:12,201 - src.pipeline.orchestrator - INFO - Validation stats: {'total_input': 1718, 'valid': 1702, 'rejected': 16, 'rejection_reasons': {'too_short': 0, 'too_long': 16, 'low_alpha_ratio': 0, 'empty_text': 0, 'other': 0}}
+2025-12-01 14:40:13,252 - src.data.validator - INFO - Removed 2 duplicates, 1700 unique blocks
+2025-12-01 14:40:14,500 - src.data.validator - INFO - Quality filter: Kept 1700, removed 0
+2025-12-01 14:40:14,501 - src.pipeline.monitoring - INFO - Stage 'Data Validation' completed in 3.27 seconds
+2025-12-01 14:40:14,501 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' started
+2025-12-01 14:40:14,501 - src.pipeline.orchestrator - INFO - Extracting knowledge graphs from 1700 blocks...
+2025-12-01 14:40:14,501 - src.extraction.kg_builder - INFO - Processing 1700 blocks in batches of 50
+2025-12-01 16:18:40,776 - src.extraction.kg_builder - INFO - Extracted 3609147 entities and 40559658 relationships
+2025-12-01 16:18:40,782 - src.pipeline.monitoring - INFO - Stage 'KG Extraction' completed in 5906.28 seconds
+2025-12-01 16:18:40,782 - src.pipeline.monitoring - INFO - Stage 'Storage' started
+2025-12-01 16:18:40,783 - src.pipeline.orchestrator - INFO - ⚡ Skipping file storage (direct Neo4j import mode)
+2025-12-01 16:18:40,793 - src.pipeline.orchestrator - INFO - 💾 Saved minimal summary: data/output/pipeline_summary_20251201_161840.json (~1KB)
+2025-12-01 16:18:40,793 - src.pipeline.orchestrator - INFO -    Entities: 3,609,147
+2025-12-01 16:18:40,793 - src.pipeline.orchestrator - INFO -    Relationships: 40,559,658
+2025-12-01 16:18:40,793 - src.pipeline.monitoring - INFO - Stage 'Storage' completed in 0.01 seconds
+2025-12-01 16:18:40,793 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' started
+2025-12-01 16:18:40,793 - src.pipeline.orchestrator - INFO - Exporting to Neo4j...
+2025-12-01 16:18:40,844 - src.storage.optimized_neo4j_connector - INFO - ✅ Connected to Neo4j at bolt://192.168.9.175:7687
+2025-12-01 16:18:40,844 - src.storage.optimized_neo4j_connector - INFO - Creating entity ID constraint...
+2025-12-01 16:18:40,940 - src.storage.optimized_neo4j_connector - INFO - ✅ ID constraint created
+2025-12-01 16:18:40,940 - src.storage.optimized_neo4j_connector - INFO - ⚡ NO FILTERING - Importing ALL data
+2025-12-01 16:18:40,940 - src.storage.optimized_neo4j_connector - INFO -    Entities: 3,609,147
+2025-12-01 16:18:40,940 - src.storage.optimized_neo4j_connector - INFO -    Relationships: 40,559,658
+2025-12-01 16:18:40,941 - src.storage.optimized_neo4j_connector - INFO - Importing 3,609,147 entities in batches of 5,000...
+2025-12-01 16:20:55,214 - src.storage.optimized_neo4j_connector - INFO - ✅ Imported 3,609,147 entities
+2025-12-01 16:20:55,535 - src.storage.optimized_neo4j_connector - INFO - Importing 40,559,658 relationships in batches of 2,000...
+2025-12-01 16:54:23,922 - src.storage.optimized_neo4j_connector - INFO - ✅ Imported 40,559,658 relationships
+2025-12-01 16:54:26,123 - src.storage.optimized_neo4j_connector - INFO - Creating search indexes (this may take 1-2 minutes)...
+2025-12-01 16:54:26,137 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created text index
+2025-12-01 16:54:26,157 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created label index
+2025-12-01 16:54:26,164 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created block_id index
+2025-12-01 16:54:26,172 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created confidence index
+2025-12-01 16:54:26,186 - src.storage.optimized_neo4j_connector - INFO -   ✓ Created fulltext index
+2025-12-01 16:54:26,186 - src.storage.optimized_neo4j_connector - INFO - ✅ All indexes created!
+2025-12-01 16:54:42,049 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-12-01 16:54:42,049 - src.storage.optimized_neo4j_connector - INFO - ✅ NEO4J EXPORT COMPLETE
+2025-12-01 16:54:42,049 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-12-01 16:54:42,049 - src.storage.optimized_neo4j_connector - INFO - Entities: 3,935,464
+2025-12-01 16:54:42,050 - src.storage.optimized_neo4j_connector - INFO - Relationships: 42,019,488
+2025-12-01 16:54:42,050 - src.storage.optimized_neo4j_connector - INFO - ============================================================
+2025-12-01 16:54:42,051 - src.pipeline.orchestrator - INFO - Neo4j export completed: {'total_nodes': 3935464, 'total_relationships': 42019488, 'entity_types': [{'type': 'NOUN_PHRASE', 'count': 1479640}, {'type': 'NOUN', 'count': 1296117}, {'type': 'PROPN', 'count': 560021}, {'type': 'CARDINAL', 'count': 76608}, {'type': 'ORG', 'count': 60091}, {'type': 'PERSON', 'count': 35741}, {'type': 'DATE', 'count': 28204}, {'type': 'GPE', 'count': 24980}, {'type': 'NORP', 'count': 7954}, {'type': 'ORDINAL', 'count': 7057}], 'relationship_types': [{'type': 'DIRECT_CONNECTION', 'count': 14308399}, {'type': 'OF', 'count': 853256}, {'type': 'AND', 'count': 627111}, {'type': 'SQUASH', 'count': 555205}, {'type': 'IN', 'count': 513779}, {'type': 'UPLOAD', 'count': 413433}, {'type': 'ANSWER', 'count': 348002}, {'type': 'FOR', 'count': 319852}, {'type': 'SIZE', 'count': 310604}, {'type': 'UPLOAD_SIZE', 'count': 237424}], 'entities_imported': 3609147, 'relationships_imported': 40559658}
+2025-12-01 16:54:42,055 - src.pipeline.monitoring - INFO - Stage 'Neo4j Export' completed in 2161.26 seconds
+2025-12-01 16:54:42,056 - src.pipeline.monitoring - INFO - Pipeline execution completed in 8071.44 seconds
+2025-12-01 16:54:42,074 - src.storage.file_saver - INFO - Created summary report: data/output/reports/summary_20251201_165442.txt
+2025-12-01 16:54:42,075 - src.pipeline.orchestrator - INFO - Pipeline execution completed successfully!

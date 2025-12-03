@@ -1,0 +1,28 @@
+# Fast Knowledge Graph Pipeline Requirements
+
+# Core NLP and ML
+spacy>=3.7.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Configuration
+PyYAML>=6.0
+
+# Document processing
+PyPDF2>=3.0.0
+python-docx>=1.1.0
+openpyxl>=3.1.0
+xlrd>=2.0.1
+
+# Neo4j support with optimizations
+neo4j>=5.0.0
+
+# Progress tracking and utilities
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+
+# Performance and caching
+cachetools>=5.3.0
+
+# Note: To install spaCy language model, run:
+# python -m spacy download en_core_web_sm

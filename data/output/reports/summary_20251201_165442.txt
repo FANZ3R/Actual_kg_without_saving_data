@@ -1,0 +1,37 @@
+================================================================================
+KNOWLEDGE GRAPH EXTRACTION SUMMARY
+================================================================================
+Timestamp: 2025-12-01 16:54:42
+
+Total Blocks Processed: 1700
+Total Entities Extracted: 3609147
+Total Relationships Extracted: 40559658
+
+Top Entity Types:
+  NOUN_PHRASE: 1479640
+  NOUN: 1296117
+  PROPN: 560021
+  CARDINAL: 76608
+  ORG: 60091
+  PERSON: 35741
+  DATE: 28204
+  GPE: 24980
+  NORP: 7954
+  ORDINAL: 7057
+
+Top Relationship Types:
+  direct_connection: 14308399
+  of: 853256
+  and: 627111
+  squash: 555205
+  in: 513779
+  upload: 413433
+  answer: 348002
+  for: 319852
+  size: 310604
+  upload_size: 237424
+
+Confidence Statistics:
+  Entities - Avg: 0.620, Min: 0.500, Max: 1.000
+  Relationships - Avg: 0.434, Min: 0.250, Max: 1.000
+================================================================================

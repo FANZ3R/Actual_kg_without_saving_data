@@ -1,0 +1,116 @@
+# Default Configuration for Fast Knowledge Graph Extraction Pipeline
+
+# Data Ingestion Settings
+ingestion:
+  min_text_length: 10
+  max_text_length: 100000
+  supported_formats:
+    - .json
+    - .csv
+    - .xlsx
+    - .xls
+    - .pdf
+    - .docx
+    - .txt
+
+# Data Validation Settings
+validation:
+  enabled: true
+  min_text_length: 10
+  max_text_length: 100000
+  min_alpha_ratio: 0.5
+  min_quality_score: 0.3
+  remove_urls: true
+  remove_emails: true
+  deduplicate: true
+
+# Knowledge Graph Extraction Settings
+extraction:
+  spacy_model: "en_core_web_sm"
+  batch_size: 50
+  enable_all_methods: true
+  methods:
+    spacy_ner: true
+    noun_phrases: true
+    single_tokens: true
+    verb_relationships: true
+    preposition_relationships: true
+    dependency_paths: true
+    syntactic_patterns: true
+    semantic_proximity: true
+
+# ⚡ Fast Query Settings (NEW)
+query:
+  enable_cache: true
+  cache_size: 1000
+  cache_ttl: 3600
+  min_confidence: 0.6
+  default_top_k: 15
+  max_neighbors: 5
+  max_query_time_ms: 500
+
+# Output Settings
+output:
+  base_dir: "data/output"
+  formats: []
+  save_state: false
+  create_summary: false
+
+# # Neo4j Settings with Optimization
+# neo4j:
+#   enabled: true
+#   uri: "bolt://localhost:7687"
+#   username: "neo4j"
+#   password: "password"
+#   clear_database: true
+#   confidence_threshold: 0.5
+  
+#   # ⚡ Batch import optimization
+#   entity_batch_size: 5000
+#   relationship_batch_size: 2000
+  
+#   # ⚡ Index creation
+#   create_indexes: true
+#   create_fulltext_index: true
+  
+#   # ⚡ Connection pooling
+#   max_connection_lifetime: 3600
+#   max_connection_pool_size: 50
+#   connection_timeout: 30
+
+# Neo4j Settings with Optimization
+neo4j:
+  enabled: true
+  uri: "bolt://192.168.9.175:7687"  # ← NEW PORT
+  username: "neo4j"
+  password: "vipani@123"  # ← SIMPLE PASSWORD
+  clear_database: false
+  confidence_threshold: 0.0
+  
+  # ⚡ Batch import optimization
+  entity_batch_size: 5000
+  relationship_batch_size: 2000
+  
+  # ⚡ Index creation
+  create_indexes: true
+  create_fulltext_index: true
+  
+  # ⚡ Connection pooling
+  max_connection_lifetime: 3600
+  max_connection_pool_size: 50
+  connection_timeout: 30
+
+# Logging Settings
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/pipeline.log"
+  console: true
+
+# Pipeline Settings
+pipeline:
+  input_dir: "data/raw"
+  processed_dir: "data/processed"
+  output_dir: "data/output"
+  convert_to_json: true
+  json_batch_size: 1000
