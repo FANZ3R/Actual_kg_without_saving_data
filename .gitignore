@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Root-level data folder (excludes src/data)
+/data/
+
+# Backup files
+*.tar.gz
+
+# IDE/Editor
+.vscode/
+.idea/
+
+# Extra files
+chatbots_file_extra/
+
+# Logs
+logs/*.log
+
+# Environment
+.env
+*.env

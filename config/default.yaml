@@ -26,8 +26,8 @@ validation:
 
 # Knowledge Graph Extraction Settings
 extraction:
-  spacy_model: "en_core_web_trf"
-  batch_size: 50
+  spacy_model: "en_core_web_sm"
+  batch_size: 100
   enable_all_methods: true
   methods:
     spacy_ner: true
@@ -56,40 +56,20 @@ output:
   save_state: false
   create_summary: false
 
-# # Neo4j Settings with Optimization
-# neo4j:
-#   enabled: true
-#   uri: "bolt://localhost:7687"
-#   username: "neo4j"
-#   password: "password"
-#   clear_database: true
-#   confidence_threshold: 0.5
-  
-#   # ⚡ Batch import optimization
-#   entity_batch_size: 5000
-#   relationship_batch_size: 2000
-  
-#   # ⚡ Index creation
-#   create_indexes: true
-#   create_fulltext_index: true
-  
-#   # ⚡ Connection pooling
-#   max_connection_lifetime: 3600
-#   max_connection_pool_size: 50
-#   connection_timeout: 30
+
 
 # Neo4j Settings with Optimization
 neo4j:
   enabled: true
-  uri: "bolt://localhost:7688"  # ← NEW PORT
+  uri: "bolt://localhost:7687"  
   username: "neo4j"
-  password: "12345678"  # ← SIMPLE PASSWORD
-  clear_database: false
+  password: "12345678"  
+  clear_database: true
   confidence_threshold: 0.0
   
   # ⚡ Batch import optimization
-  entity_batch_size: 5000
-  relationship_batch_size: 2000
+  entity_batch_size: 10000
+  relationship_batch_size: 5000
   
   # ⚡ Index creation
   create_indexes: true
